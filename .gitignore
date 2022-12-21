@@ -1,5 +1,5 @@
 # Data
-#/data
+/data
 
 # Hydra
 /outputs
@@ -11,20 +11,20 @@
 __pycache__
 .ipynb_checkpoints
 .mypy_cache
-#/notebooks
+/notebooks
 
 # Virtual environment
-#venv
+venv
 
 # Weights & Biases
-#wandb
+wandb
 
 # pytest
 .coverage*
 .pytest_cache
-#htmlcov
+htmlcov
 
 # Misc
 .DS_Store
 *.egg-info
-#artifacts
+artifacts

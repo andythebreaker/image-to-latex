@@ -71,11 +71,27 @@ class BaseDataset(Dataset):
     def __getitem__(self, idx: int):
         """Returns a sample from the dataset at the given index."""
         image_filename, formula = self.image_filenames[idx], self.formulas[idx]
-        image_filepath = self.root_dir / image_filename
+        imgfn=image_filename+".png"
+        #image_filepath = self.root_dir / image_filename
+        image_filepath = self.root_dir / imgfn
         if image_filepath.is_file():
+            print("======================================================")
+            print(image_filepath)
+            print(formula)
+            print("======================================================")
             image = pil_loader(image_filepath, mode="L")
         else:
             # Returns a blank image if cannot find the image
+            print("======================================================")
+            print(image_filepath)
+            print("======================================================")
+            print("                        _|")
+            print("_|_|_|      _|_|            _|_|_|  _|_|      _|_|_|  ")
+            print("_|    _|  _|    _|      _|  _|    _|    _|  _|    _|  ")
+            print("_|    _|  _|    _|      _|  _|    _|    _|  _|    _|  ")
+            print("_|    _|    _|_|        _|  _|    _|    _|    _|_|_|  ")
+            print("                                                  _|  ")
+            print("                                                _|_|")
             image = Image.fromarray(np.full((64, 128), 255, dtype=np.uint8))
             formula = []
         if self.transform is not None:
@@ -200,7 +216,7 @@ class Tokenizer:
 
 def get_all_formulas(filename: Path) -> List[List[str]]:
     """Returns all the formulas in the formula file."""
-    with open(filename) as f:
+    with open(filename, encoding="ISO-8859-1") as f:
         all_formulas = [formula.strip("\n").split() for formula in f.readlines()]
     return all_formulas
 
@@ -211,11 +227,16 @@ def get_split(
 ) -> Tuple[List[str], List[List[str]]]:
     image_names = []
     formulas = []
+    #print("[debug(andythrbreaker)]",end='')
+    #print(all_formulas)
     with open(filename) as f:
         for line in f:
-            img_name, formula_idx = line.strip("\n").split()
-            image_names.append(img_name)
-            formulas.append(all_formulas[int(formula_idx)])
+            #img_name, formula_idx, *wtf = line.strip("\n").split()
+            img_name, formula_idx, *wtf = line.strip("\n").split()
+            image_names.append(formula_idx)#img_name)
+            #print("[debug(andythrbreaker)]",end='')
+            #print(int(img_name))
+            formulas.append(all_formulas[int(img_name)])#formula_idx,16)])
     return image_names, formulas
 
 

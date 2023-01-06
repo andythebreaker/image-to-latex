@@ -52,14 +52,17 @@ class LitResNetTransformer(LightningModule):
     def training_step(self, batch, batch_idx):
         imgs, targets = batch
         logits = self.model(imgs, targets[:, :-1])
-        loss = self.loss_fn(logits, targets[:, 1:])
+        print("ああああああああああああああああああああああああああああああああ")
+        print(logits.shape)
+        print((targets[:,1:]).shape)
+        loss = self.loss_fn(logits, targets[:, 1:(logits.shape[2]+1)])
         self.log("train/loss", loss)
         return loss
 
     def validation_step(self, batch, batch_idx):
         imgs, targets = batch
         logits = self.model(imgs, targets[:, :-1])
-        loss = self.loss_fn(logits, targets[:, 1:])
+        loss = self.loss_fn(logits, targets[:, 1:(logits.shape[2]+1)])#1:])
         self.log("val/loss", loss, on_step=False, on_epoch=True, prog_bar=True)
 
         preds = self.model.predict(imgs)

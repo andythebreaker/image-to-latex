@@ -60,11 +60,19 @@ class PositionalEncoding1D(nn.Module):
     def make_pe(d_model: int, max_len: int) -> Tensor:
         """Compute positional encoding."""
         pe = torch.zeros(max_len, d_model)
+        #print("================")
+        #print("\t",end='');print(pe.shape)
         position = torch.arange(0, max_len, dtype=torch.float).unsqueeze(1)
+        #print("\t",end='');print(pe.shape)
         div_term = torch.exp(torch.arange(0, d_model, 2).float() * (-math.log(10000.0) / d_model))
+        #print("\t",end='');print(pe.shape)
         pe[:, 0::2] = torch.sin(position * div_term)
+        #print("\t",end='');print(pe.shape)
         pe[:, 1::2] = torch.cos(position * div_term)
+        #print("\t",end='');print(pe.shape)
         pe = pe.unsqueeze(1)
+        #print("\t",end='');print(pe.shape)
+        #print("================")
         return pe
 
     def forward(self, x: Tensor) -> Tensor:
@@ -76,6 +84,13 @@ class PositionalEncoding1D(nn.Module):
         Returns:
             (B, d_model, H, W)
         """
+        #print("________________________________________")
+        #print(x.shape)
         assert x.shape[2] == self.pe.shape[2]  # type: ignore
-        x = x + self.pe[: x.size(0)]  # type: ignore
+        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+        print(x.size())
+        #print((self.pe[: x.size(0)]).size())
+        print(self.pe.shape)
+        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+        x = x[0:self.pe.shape[0],:,:] + self.pe[: x.size(0)]  # type: ignore
         return self.dropout(x)

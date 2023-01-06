@@ -107,6 +107,7 @@ def pil_loader(fp: Path, mode: str) -> Image.Image:
 
 class Tokenizer:
     def __init__(self, token_to_index: Optional[Dict[str, int]] = None) -> None:
+        #print("???")
         self.pad_token = "<PAD>"
         self.sos_token = "<SOS>"
         self.eos_token = "<EOS>"
@@ -116,6 +117,7 @@ class Tokenizer:
         self.index_to_token: Dict[int, str]
 
         if token_to_index:
+            #print("啥軌")
             self.token_to_index = token_to_index
             self.index_to_token = {index: token for token, index in self.token_to_index.items()}
             self.pad_index = self.token_to_index[self.pad_token]
@@ -123,6 +125,7 @@ class Tokenizer:
             self.eos_index = self.token_to_index[self.eos_token]
             self.unk_index = self.token_to_index[self.unk_token]
         else:
+            #print("啥軌1")
             self.token_to_index = {}
             self.index_to_token = {}
             self.pad_index = self._add_token(self.pad_token)

@@ -33,6 +33,7 @@ class LitResNetTransformer(LightningModule):
 
         vocab_file = Path(__file__).resolve().parents[1] / "data" / "vocab.json"
         self.tokenizer = Tokenizer.load(vocab_file)
+        print(self.tokenizer)
         self.model = ResNetTransformer(
             d_model=d_model,
             dim_feedforward=dim_feedforward,

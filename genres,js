@@ -1,0 +1,78 @@
+
+var my_awesome_script = document.createElement('script');
+
+my_awesome_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js');
+
+document.head.appendChild(my_awesome_script);
+
+function downloadURI(uri, name) {
+    var link = document.createElement("a");
+    link.download = name;
+    link.href = uri;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    delete link;
+}
+
+
+function rrr(aint) {
+    if (!document.getElementsByClassName('firRing')[0].getElementsByTagName('li')[alla[aint][0]].classList.contains('selected'))
+        document.getElementsByClassName('firRing')[0].getElementsByTagName('li')[alla[aint][0]].click();
+    if (!document.getElementsByClassName('secRing')[0].getElementsByTagName('li')[alla[aint][1]].classList.contains('selected'))
+        document.getElementsByClassName('secRing')[0].getElementsByTagName('li')[alla[aint][1]].click();
+    if (!document.getElementsByClassName('thirRing')[0].getElementsByTagName('li')[alla[aint][2]].classList.contains('selected'))
+        document.getElementsByClassName('thirRing')[0].getElementsByTagName('li')[alla[aint][2]].click();
+    if (!document.getElementsByClassName('multRing')[0].getElementsByTagName('li')[alla[aint][3]].classList.contains('selected'))
+        document.getElementsByClassName('multRing')[0].getElementsByTagName('li')[alla[aint][3]].click();
+    if (!document.getElementsByClassName('tolRing')[0].getElementsByTagName('li')[alla[aint][4]].classList.contains('selected'))
+        document.getElementsByClassName('tolRing')[0].getElementsByTagName('li')[alla[aint][4]].click();
+    domtoimage.toPng(node1)
+        .then(function (dataUrl) {
+            downloadURI(dataUrl, document.getElementById('res').innerText + '_ohm_' + document.getElementById('percent').innerText + '.png');
+            if (aint < 72900/*7290*/) rrr(aint + 1);
+            else
+                console.log("bingo<3");
+        })
+        .catch(function (error) {
+            console.error('oops, something went wrong!', error);
+        });
+}
+var node1 = document.getElementsByClassName('ringArea')[0];
+var a1 = document.getElementsByClassName('firRing')[0].getElementsByTagName('li').length
+var a2 = document.getElementsByClassName('secRing')[0].getElementsByTagName('li').length
+var a0 = document.getElementsByClassName('thirRing')[0].getElementsByTagName('li').length
+
+var a3 = document.getElementsByClassName('multRing')[0].getElementsByTagName('li').length
+var a4 = document.getElementsByClassName('tolRing')[0].getElementsByTagName('li').length
+var totalcount = 0;
+for (var z1 = 0; z1 < a1; z1++) {
+    for (var z2 = 0; z2 < a2; z2++) {
+        for (var z0 = 0; z0 < a0; z0++) {
+            for (var z3 = 0; z3 < a3; z3++) {
+                for (var z4 = 0; z4 < a4; z4++) {
+                    totalcount++;
+                }
+            }
+        }
+    }
+}
+console.log(totalcount);
+var alla = [];
+totalcount = 0;
+/*totalcount++;
+alla.push([z1, z2, z3, z4]);*/
+for (var z1 = 0; z1 < a1; z1++) {
+    for (var z2 = 0; z2 < a2; z2++) {
+        for (var z0 = 0; z0 < a0; z0++) {
+            for (var z3 = 0; z3 < a3; z3++) {
+                for (var z4 = 0; z4 < a4; z4++) {
+                    totalcount++;
+                    alla.push([z1, z2, z0, z3, z4]);
+                }
+            }
+        }
+    }
+}
+console.log(totalcount);
+rrr(0);

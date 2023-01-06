@@ -1,5 +1,6 @@
 # Data
 /data
+/clearml
 
 # Hydra
 /outputs
@@ -28,3 +29,6 @@ htmlcov
 .DS_Store
 *.egg-info
 artifacts
+
+*.jpg
+*.png

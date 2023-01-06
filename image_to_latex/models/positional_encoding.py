@@ -92,5 +92,5 @@ class PositionalEncoding1D(nn.Module):
         #print((self.pe[: x.size(0)]).size())
         print(self.pe.shape)
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-        x = x[0:self.pe.shape[0],:,:] + self.pe[: x.size(0)]  # type: ignore
+        x = x + self.pe[: x.size(0)] # type: ignore
         return self.dropout(x)
